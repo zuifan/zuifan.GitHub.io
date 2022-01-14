@@ -1,58 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>hexo基本操作</title>
-    <url>/2022/01/13/hexo/</url>
-    <content><![CDATA[<h1>发布文章</h1>
-<p>进入博客所在目录,右键打开 Git Bash Here,创建博文:</p>
-<blockquote>
-<p>hexo new “My New Post”</p>
-</blockquote>
-<p>然后 source 文件夹中会出现一个 My New <a href="http://Post.md">Post.md</a> 文件,就可以使用 Markdown 编辑器在该文件中撰写文章了。<br>
-写完后运行下面代码将文章渲染并部署到 GitHub Pages 上完成发布。以后每次发布文章都是这两条命令。</p>
-<blockquote>
-<p>hexo g   # 生成页面<br>
-hexo d   # 部署发布</p>
-</blockquote>
-<span id="more"></span>
-<p>也可以不使用命令自己创建 .md 文件,只需在文件开头手动加入如下格式 Front-matter 即可,写完后运行 <code>hexo g</code> 和 <code>hexo d</code> 发布。</p>
-<blockquote>
-<p>title: Hello World # 标题<br>
-date: 2019/3/26 hh:mm:ss # 时间<br>
-categories: # 分类<br>
--Diary<br>
-tags: # 标签</p>
-<p>摘要<br>
-<code>&lt;!–more–&gt;</code><br>
-正文</p>
-</blockquote>
-<h1>常用命令</h1>
-<blockquote>
-<p>hexo new “name”       # 新建文章<br>
-hexo new page “name”  # 新建页面<br>
-hexo g                # 生成页面<br>
-hexo d                # 部署<br>
-hexo g -d             # 生成页面并部署<br>
-hexo s                # 本地预览<br>
-hexo clean            # 清除缓存和已生成的静态文件<br>
-hexo help             # 帮助</p>
-</blockquote>
-<h1>显示文章摘要</h1>
-<p>Hexo 主页文章列表默认会显示文章全文,浏览时很不方便,可以在文章中插入<code>&lt;!–more–&gt;</code>进行分段。</p>
-<p>该代码前面的内容会作为摘要显示,而后面的内容会替换为 “Read More” 隐藏起来。</p>
-]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>hexo基本操作</title>
+      <link href="/2022/01/13/hexo/"/>
+      <url>/2022/01/13/hexo/</url>
+      
+        <content type="html"><![CDATA[<h1>发布文章</h1><p>进入博客所在目录,右键打开 Git Bash Here,创建博文:</p><blockquote><p>hexo new “My New Post”</p></blockquote><p>然后 source 文件夹中会出现一个 My New <a href="http://Post.md">Post.md</a> 文件,就可以使用 Markdown 编辑器在该文件中撰写文章了。<br>写完后运行下面代码将文章渲染并部署到 GitHub Pages 上完成发布。以后每次发布文章都是这两条命令。</p><blockquote><p>hexo g   # 生成页面<br>hexo d   # 部署发布</p></blockquote><span id="more"></span><p>也可以不使用命令自己创建 .md 文件,只需在文件开头手动加入如下格式 Front-matter 即可,写完后运行 <code>hexo g</code> 和 <code>hexo d</code> 发布。</p><blockquote><p>title: Hello World # 标题<br>date: 2019/3/26 hh:mm:ss # 时间<br>categories: # 分类<br>-Diary<br>tags: # 标签</p><p>摘要<br><code>&lt;!–more–&gt;</code><br>正文</p></blockquote><h1>常用命令</h1><blockquote><p>hexo new “name”       # 新建文章<br>hexo new page “name”  # 新建页面<br>hexo g                # 生成页面<br>hexo d                # 部署<br>hexo g -d             # 生成页面并部署<br>hexo s                # 本地预览<br>hexo clean            # 清除缓存和已生成的静态文件<br>hexo help             # 帮助</p></blockquote><h1>显示文章摘要</h1><p>Hexo 主页文章列表默认会显示文章全文,浏览时很不方便,可以在文章中插入<code>&lt;!–more–&gt;</code>进行分段。</p><p>该代码前面的内容会作为摘要显示,而后面的内容会替换为 “Read More” 隐藏起来。</p>]]></content>
+      
+      
       <categories>
-        <category>hexo</category>
+          
+          <category> hexo </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>写在前面</title>
-    <url>/2022/01/12/start/</url>
-    <content><![CDATA[<h3 id="做了一天的界面，虽然很累，虽然不尽人意，虽然…">做了一天的界面，虽然很累，虽然不尽人意，虽然…</h3>
-<h2 id="但真的比昨天强太多了，网页的背景搞不上去，这个姑且先放着，以后再研究吧-😉">但真的比昨天强太多了，网页的背景搞不上去，这个姑且先放着，以后再研究吧~😉</h2>
-]]></content>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>写在前面</title>
+      <link href="/2022/01/12/start/"/>
+      <url>/2022/01/12/start/</url>
+      
+        <content type="html"><![CDATA[<h3 id="做了一天的界面，虽然很累，虽然不尽人意，虽然…">做了一天的界面，虽然很累，虽然不尽人意，虽然…</h3><h2 id="但真的比昨天强太多了，网页的背景搞不上去，这个姑且先放着，以后再研究吧-😉">但真的比昨天强太多了，网页的背景搞不上去，这个姑且先放着，以后再研究吧~😉</h2>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
 </search>
