@@ -3008,10 +3008,10 @@ body {
   opacity: 0.8;
 }
 .sidebar-inner {
-  background: rgba(255,255,255,0.8) none repeat scroll !important;
+  background: rgba(255,255,255,0.7) none repeat scroll !important;
 }
 .header-inner {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.7);
 }
 .popup {
   opacity: 0.9;
@@ -3020,7 +3020,7 @@ body {
   background: rgba(255,255,255,0.8) none repeat scroll !important;
 }
 .comments {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 /**普通指针样式**/
 body {
