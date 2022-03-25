@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zuifan.github.io/2022/03/25/sql%E6%B3%A8%E5%85%A5/</loc>
+    <loc>https://zuifan.github.io/2022/03/25/SQL%E6%B3%A8%E5%85%A501/</loc>
     
     <lastmod>2022-03-25</lastmod>
     
@@ -71,24 +71,10 @@
     <priority>0.2</priority>
   </url>
   
-  <url>
-    <loc>https://zuifan.github.io/tags/sql%E6%B3%A8%E5%85%A5/</loc>
-    <lastmod>2022-03-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
 
   
   <url>
     <loc>https://zuifan.github.io/categories/hexo/</loc>
-    <lastmod>2022-03-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zuifan.github.io/categories/%E6%B8%97%E9%80%8F/</loc>
     <lastmod>2022-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
