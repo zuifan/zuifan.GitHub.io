@@ -7,12 +7,12 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="搭建环境攻击机：Kali-linux-2022.1:192.168.31.120 靶机：Vulnerable-DC-4：192.168.31.247">
+<meta name="description" content="搭建环境攻击机：Kali-linux-2022.1:192.168.31.120 靶机：Vulnerable-DC-4：192.168.31.247 信息收集主机探活arp-scan -l 或 nmap -sP 192.168.31.0&#x2F;24  nmap扫描靶机IP1nmap -A -p- 192.168.31.247   渗透测试发现开放了22和80端口，访问80端口   发现是一个登">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vulnerable-DC-4靶机渗透学习">
-<meta property="og:url" content="https://fzy.asia/2022/09/22/Vulnhub-DC-4%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:url" content="https://fzy.asia/2022/10/04/Vulnhub-DC-4%E9%9D%B6%E6%9C%BA%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="FZY的Blog">
-<meta property="og:description" content="搭建环境攻击机：Kali-linux-2022.1:192.168.31.120 靶机：Vulnerable-DC-4：192.168.31.247">
+<meta property="og:description" content="搭建环境攻击机：Kali-linux-2022.1:192.168.31.120 靶机：Vulnerable-DC-4：192.168.31.247 信息收集主机探活arp-scan -l 或 nmap -sP 192.168.31.0&#x2F;24  nmap扫描靶机IP1nmap -A -p- 192.168.31.247   渗透测试发现开放了22和80端口，访问80端口   发现是一个登">
 <meta property="og:locale">
 <meta property="og:image" content="https://s1.328888.xyz/2022/09/22/II4QF.jpg">
 <meta property="og:image" content="https://s1.328888.xyz/2022/09/22/II1KR.jpg">
@@ -32,8 +32,8 @@
 <meta property="og:image" content="https://s1.328888.xyz/2022/09/24/V4D7o.jpg">
 <meta property="og:image" content="https://s1.328888.xyz/2022/09/24/V3tbF.png">
 <meta property="og:image" content="https://s1.328888.xyz/2022/09/24/V3zn5.png">
-<meta property="article:published_time" content="2022-09-22T11:37:18.000Z">
-<meta property="article:modified_time" content="2022-09-24T10:35:23.617Z">
+<meta property="article:published_time" content="2022-10-04T03:27:53.000Z">
+<meta property="article:modified_time" content="2022-10-07T08:19:53.998Z">
 <meta property="article:author" content="zhaoyang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.328888.xyz/2022/09/22/II4QF.jpg">
@@ -81,7 +81,7 @@
 
 
 <!-- Variable -->
-<script>window.ASYNC_CONFIG = {"hostname":"fzy.asia","author":"zhaoyang","root":"/","typed_text":["Web Developer"],"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)Hey! Good again!","hideText":"(●—●)Oh, crash!"},"theme_version":"v1.1.10","theme":{"switch":true,"default":"style-light"},"search":{"enable":false,"type":"engine","href":"https://www.google.com/search?q=site:","domain":null},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated."},"creative_commons":{"license":"by-nc-sa","language":"deed.zh","post":false,"clipboard":false},"swup":false};</script>
+<script>window.ASYNC_CONFIG = {"hostname":"fzy.asia","author":"zhaoyang","root":"/","typed_text":["Web Developer"],"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"theme_version":"v1.1.10","theme":{"switch":true,"default":"style-light"},"search":{"enable":false,"type":"engine","href":"https://www.google.com/search?q=site:","domain":null},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh","post":false,"clipboard":false},"swup":false};</script>
 
 <!-- Theme mode css -->
 
@@ -176,14 +176,14 @@
 						
 						<li class="menu-item-has-children ">
 							<a  href="/" target="">
-								Home
+								首页
 							</a>
 							
 						</li>
 						
 						<li class="menu-item-has-children ">
 							<a  href="/archives/" target="">
-								Archives
+								归档
 							</a>
 							
 						</li>
@@ -225,7 +225,7 @@
     <div class="trm-banner" data-scroll data-scroll-direction="vertical">
     
     <!-- banner cover -->
-    <img src="/img/banner.png" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
+    <img src="https://pic1.zhimg.com/v2-b3c2c6745b9421a13a3c4706b19223b3_r.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
     <!-- banner cover end -->
     
 
@@ -241,7 +241,7 @@
                     <!-- banner title -->
                     <div class="trm-banner-text ">
                         <div class="trm-label trm-mb-20">
-                            NEWS LETTER
+                            Hi my new friend!
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
                             Vulnerable-DC-4靶机渗透学习
@@ -356,7 +356,7 @@
 <!-- action button -->
 <div class="text-center">
     <a href="mailto:2595020002@qq.com" class="trm-btn">
-        Contact Me
+        联系我
         <i class="far fa-envelope"></i>
     </a>
 </div>
@@ -376,13 +376,13 @@
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="far fa-calendar-alt trm-icon"></i><br>
-            09/22
+            10/04
         </div>
     </div>
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="far fa-clock trm-icon"></i><br>
-            07:37
+            11:27
         </div>
     </div>
     <div class="col-sm-4">
@@ -396,8 +396,6 @@
     <article class="trm-publication">
     <h1 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h1><p>攻击机：Kali-linux-2022.1:192.168.31.120</p>
 <p>靶机：Vulnerable-DC-4：192.168.31.247</p>
-<span id="more"></span>
-
 <h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><h5 id="主机探活"><a href="#主机探活" class="headerlink" title="主机探活"></a>主机探活</h5><p>arp-scan -l 或 nmap -sP 192.168.31.0&#x2F;24</p>
 <p><img src="https://s1.328888.xyz/2022/09/22/II4QF.jpg" loading="lazy"></p>
 <h5 id="nmap扫描靶机IP"><a href="#nmap扫描靶机IP" class="headerlink" title="nmap扫描靶机IP"></a>nmap扫描靶机IP</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -p- 192.168.31.247</span><br></pre></td></tr></table></figure>
@@ -458,10 +456,11 @@
     <div class="col-lg-12">
         <!-- title -->
         <h5 class="trm-mb-40 trm-title-with-divider">
-            Other Articles
+            其他文章
             <span data-number="02"></span>
         </h5>
     </div>
+    
     
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
@@ -471,7 +470,7 @@
         <div class="trm-card-descr">
             <div class="trm-label trm-category trm-mb-20">
                 <a href=" #.">
-                    Unclassified
+                    未分类
                 </a>
             </div>
             <h5>
@@ -489,7 +488,6 @@
         </div>
     </div>
 </div>
-    
     
 </div>
 
@@ -510,11 +508,11 @@
     
         <div class="trm-footer-item">
             <span>
-                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.3.0
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
             </span>
             <span class="footer-separator"> | </span>
             <span> 
-                Theme - 
+                主题 - 
                 <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
                 vv1.1.10
             </span>
